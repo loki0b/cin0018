@@ -1,0 +1,32 @@
+\question{Limpe a cache local DNS do seu host e acesse o site www.ietf.org}
+ 
+\begin{parts}
+    \part{Verifique qual (is) o(s) registro(s) associados ao site que está (ao) armazenadas na cache local DNS. Descreva um registro.}
+    \begin{solution}
+    \begin{minted}[breaklines]{console}
+    loki0b@4rch ~ $ sudo resolvectl show-cache
+    Scope protocol=llmnr family=AF_INET6 ifindex=6 ifname=wlan1
+    No entries.
+
+    Scope protocol=llmnr family=AF_INET ifindex=6 ifname=wlan1
+    No entries.
+
+    Scope protocol=dns ifindex=6 ifname=wlan1 DNSSEC=no DNSOverTLS=yes
+    https://www.ietf.org/ IN ANY NXDOMAIN
+    www.ietf.org IN AAAA 2606:4700::6810:2c63
+    www.ietf.org IN AAAA 2606:4700::6810:2d63
+    3.6.c.2.0.1.8.6.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.7.4.6.0.6.2.ip6.arpa IN ANY NXDOMAIN
+    www.ietf.org IN A 104.16.45.99
+    www.ietf.org IN A 104.16.44.99
+
+    Scope protocol=dns DNSSEC=no DNSOverTLS=yes
+    https://www.ietf.org/ IN ANY NXDOMAIN
+    www.ietf.org IN AAAA 2606:4700::6810:2d63
+    www.ietf.org IN AAAA 2606:4700::6810:2c63
+    3.6.c.2.0.1.8.6.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.7.4.6.0.6.2.ip6.arpa IN ANY NXDOMAIN
+    www.ietf.org IN A 104.16.45.99
+    www.ietf.org IN A 104.16.44.99
+    \end{minted}
+    Descrevendo o registro \mintinline{console}{www.ietf.org IN A 104.16.45.99}, www.ietf.org aponta para o IPv4 104.16.45.99.
+    \end{solution}
+\end{parts}

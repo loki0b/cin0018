@@ -1,0 +1,248 @@
+\question{Faça uma consulta padrão para obter o endereço IP do host www.youtube.com e responda}
+
+\begin{parts}
+    \part{Qual o servidor DNS default (nome e endereço IP) que respondeu a consulta?(Capture a tela obtida e destaque o endereço do referido)}
+    \begin{solution}
+    Meu resolver local.
+    \begin{minted}{console}
+    loki0b@4rch ~ $ nslookup www.youtube.com
+    Server:		127.0.0.53
+    Address:	127.0.0.53#53
+
+    Non-authoritative answer:
+    www.youtube.com	canonical name = youtube-ui.l.google.com.
+    Name:	youtube-ui.l.google.com
+    Address: 142.250.218.238    
+    \end{minted}
+    \end{solution}
+
+    \part{O servidor que respondeu a solicitação é responsável (tem autoridade) sobre o domínio consultado? Que mensagem justifica sua resposta?}
+    \begin{solution}
+    Não. A mensagem "Non-authoritative answer"            
+    \end{solution}
+
+    \part{Quantos endereços IP estão associados ao nome pesquisado? Caso seja mais que um endereço IP, explique o porquê disso. (Capture a tela obtida e destaque os endereços)}
+    \begin{solution}
+    16. Eles possuem diversos servidores para balancear carga e deixar mais proximo geograficamente dos clientes ao redor do mundo.
+    \begin{minted}{console}
+    loki0b@4rch ~ $ nslookup www.youtube.com | grep "Address"
+    Address:	127.0.0.53#53
+    Address: 172.217.172.14
+    Address: 142.251.132.238
+    Address: 142.250.79.174
+    Address: 142.250.219.142
+    Address: 142.251.129.238
+    Address: 142.250.219.46
+    Address: 172.217.162.206
+    Address: 142.250.218.238
+    Address: 142.250.219.14
+    Address: 142.250.78.174
+    Address: 142.251.132.46
+    Address: 142.250.78.206
+    Address: 2800:3f0:4004:812::200e
+    Address: 2800:3f0:4004:811::200e
+    Address: 2800:3f0:4004:80f::200e
+    Address: 2800:3f0:4004:80b::200e
+    loki0b@4rch ~ $ nslookup www.youtube.com | grep Address | wc --lines
+    17
+    \end{minted}            
+    \end{solution}
+
+    \part{Quais são os servidores DNS (nome e endereço) com autoridade para o domínio youtube.com? (Capture a tela obtida e destaque a resposta)}
+    \begin{solution}
+    \begin{minted}{console}
+    loki0b@4rch ~ $ nslookup -type=NS www.youtube.com
+    Server:		127.0.0.53
+    Address:	127.0.0.53#53
+
+    Non-authoritative answer:
+    www.youtube.com	canonical name = youtube-ui.l.google.com.
+
+    Authoritative answers can be found from:
+    l.google.com
+        origin = ns1.google.com
+        mail addr = dns-admin.google.com
+        serial = 895796075
+        refresh = 900
+        retry = 900
+        expire = 1800
+        minimum = 60
+    \end{minted}
+    \end{solution}
+
+    \part{Os servidores obtidos no item 1.a estão entre os obtidos no item 2? Por quê?}
+    \begin{solution}
+        
+    \end{solution}
+
+    \part{Faça uma consulta para obter o IP do host www.youtube.com utilizando um dos servidores DNS autoritativos obtidos no item 2.(Capture a tela obtida na consulta)}
+    \begin{solution}
+    \begin{minted}{console}
+    loki0b@4rch ~ $ nslookup www.youtube.com ns1.google.com
+    Server:		ns1.google.com
+    Address:	2001:4860:4802:32::a#53
+
+    www.youtube.com	canonical name = youtube-ui.l.google.com.
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.30.238
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.162.174
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.162.238
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.172.142
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.172.46
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.172.174
+    Name:	youtube-ui.l.google.com
+    Address: 142.250.79.206
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.29.46
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.29.78
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.29.110
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.29.142
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.29.174
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.29.206
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.29.238
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.30.14
+    Name:	youtube-ui.l.google.com
+    Address: 172.217.30.46
+    Name:	youtube-ui.l.google.com
+    Address: 2800:3f0:4001:80a::200e
+    Name:	youtube-ui.l.google.com
+    Address: 2800:3f0:4001:80c::200e
+    Name:	youtube-ui.l.google.com
+    Address: 2800:3f0:4001:80d::200e
+    Name:	youtube-ui.l.google.com
+    Address: 2800:3f0:4001:814::200e
+    \end{minted}
+    \end{solution}
+
+    \part{Qual o nome canônico do host www.youtube.com? (Capture a tela de resultado obtida e destaque a informação requerida)}
+    \begin{solution}
+    \begin{minted}{console}
+    loki0b@4rch ~ $ nslookup -type=CNAME www.youtube.com
+    Server:		127.0.0.53
+    Address:	127.0.0.53#53
+
+    Non-authoritative answer:
+    www.youtube.com	canonical name = youtube-ui.l.google.com.
+
+    Authoritative answers can be found from:
+    youtube-ui.l.google.com	internet address = 142.250.78.174
+    youtube-ui.l.google.com	internet address = 142.250.78.206
+    youtube-ui.l.google.com	internet address = 172.217.172.14
+    youtube-ui.l.google.com	internet address = 172.217.162.206
+    youtube-ui.l.google.com	internet address = 142.251.129.238
+    youtube-ui.l.google.com	internet address = 142.250.219.46
+    youtube-ui.l.google.com	internet address = 142.251.132.46
+    youtube-ui.l.google.com	internet address = 142.250.219.14
+    youtube-ui.l.google.com	internet address = 142.250.219.142
+    youtube-ui.l.google.com	internet address = 142.250.79.174
+    youtube-ui.l.google.com	internet address = 142.250.218.238
+    youtube-ui.l.google.com	internet address = 142.251.132.238
+    \end{minted}
+    \end{solution}
+
+    \part{Indique o nome canônico e endereço IP dos servidores de email do yahoo.com (Capture a tela de resultado obtida e destaque a informação requerida)}
+    \begin{solution}
+    \begin{minted}{console}
+    loki0b@4rch ~ $ nslookup -type=MX yahoo.com
+    Server:		127.0.0.53
+    Address:	127.0.0.53#53
+
+    Non-authoritative answer:
+    yahoo.com	mail exchanger = 1 mta7.am0.yahoodns.net.
+    yahoo.com	mail exchanger = 1 mta5.am0.yahoodns.net.
+    yahoo.com	mail exchanger = 1 mta6.am0.yahoodns.net.
+
+    Authoritative answers can be found from:
+
+    loki0b@4rch ~ $ nslookup -type=MX yahoo.com | grep "mail exchanger" | awk '{print $NF}' | xargs -I {} nslookup {}
+    Server:		127.0.0.53
+    Address:	127.0.0.53#53
+
+    Non-authoritative answer:
+    Name:	mta7.am0.yahoodns.net
+    Address: 98.136.96.77
+    Name:	mta7.am0.yahoodns.net
+    Address: 67.195.228.111
+    Name:	mta7.am0.yahoodns.net
+    Address: 67.195.204.74
+    Name:	mta7.am0.yahoodns.net
+    Address: 98.136.96.91
+    Name:	mta7.am0.yahoodns.net
+    Address: 98.136.96.76
+    Name:	mta7.am0.yahoodns.net
+    Address: 67.195.228.110
+    Name:	mta7.am0.yahoodns.net
+    Address: 67.195.204.77
+    Name:	mta7.am0.yahoodns.net
+    Address: 67.195.204.72
+
+    Server:		127.0.0.53
+    Address:	127.0.0.53#53
+
+    Non-authoritative answer:
+    Name:	mta6.am0.yahoodns.net
+    Address: 67.195.228.110
+    Name:	mta6.am0.yahoodns.net
+    Address: 67.195.228.109
+    Name:	mta6.am0.yahoodns.net
+    Address: 67.195.228.111
+    Name:	mta6.am0.yahoodns.net
+    Address: 98.136.96.74
+    Name:	mta6.am0.yahoodns.net
+    Address: 67.195.228.94
+    Name:	mta6.am0.yahoodns.net
+    Address: 67.195.204.79
+    Name:	mta6.am0.yahoodns.net
+    Address: 98.136.96.77
+    Name:	mta6.am0.yahoodns.net
+    Address: 67.195.204.77
+
+    Server:		127.0.0.53
+    Address:	127.0.0.53#53
+
+    Non-authoritative answer:
+    Name:	mta5.am0.yahoodns.net
+    Address: 67.195.204.74
+    Name:	mta5.am0.yahoodns.net
+    Address: 67.195.228.106
+    Name:	mta5.am0.yahoodns.net
+    Address: 67.195.204.79
+    Name:	mta5.am0.yahoodns.net
+    Address: 67.195.204.72
+    Name:	mta5.am0.yahoodns.net
+    Address: 67.195.228.110
+    Name:	mta5.am0.yahoodns.net
+    Address: 67.195.228.94
+    Name:	mta5.am0.yahoodns.net
+    Address: 67.195.204.73
+    Name:	mta5.am0.yahoodns.net
+    Address: 98.136.96.77        
+    \end{minted}
+    \end{solution}
+
+    \part{Escolha um site de sua preferência e faça uma consulta para identificar o nome canônico do host que o hospeda.}
+    \begin{solution}
+    \begin{minted}{console}
+    loki0b@4rch ~ $ nslookup -type=CNAME www.github.com
+    Server:		127.0.0.53
+    Address:	127.0.0.53#53
+
+    Non-authoritative answer:
+    www.github.com	canonical name = github.com.
+
+    Authoritative answers can be found from:
+    \end{minted}
+\end{solution}
+\end{parts}

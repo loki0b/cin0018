@@ -1,0 +1,58 @@
+\question{Identifique a mensagem HTTP de resposta que é enviada do servidor para o seu browser e indique o número do pacote no wireshark. Faça a análise desta mensagem, descrevendo os seguintes elementos:}
+
+\begin{solution}
+Pacote 165    
+\end{solution}
+
+\begin{parts}
+    \part{Versão do protocolo HTTP utilizada pelo servidor}
+    \begin{solution}
+    HTTP/1.1
+    \end{solution}
+
+    \part{Código e status da resposta}
+    \begin{solution}
+    200 OK
+    \end{solution}
+
+    \part{Data de criação da mensagem.}
+    \begin{solution}
+    \mintinline{HTTP}{Thu, 09 Apr 2026 20:15:06 GMT}
+    \end{solution}
+
+    \part{O servidor Web que gerou a mensagem}
+    \begin{solution}
+    Apache/2.4.62 (AlmaLinux) OpenSSL/3.5.1 mod\_fcgid/2.3.9 mod\_perl/2.0.12 Perl/v5.32.1            
+    \end{solution}
+
+    \part{Data e horário da última modificação do objeto no servidor.}
+    \begin{solution}
+    Tue, 28 Oct 2025 05:59:01 GMT            
+    \end{solution}
+
+    \part{No corpo da entidade da mensagem, qual o tipo de objeto enviado.}
+    \begin{solution}
+    text/html; charset=UTF-8
+    \end{solution}
+        
+
+    \part{A quantidade de bytes de conteúdo que está sendo retornada para o seu browser}
+    \begin{solution}
+    128
+    \end{solution}
+
+    \part{O protocolo da camada de transporte usado}
+    \begin{solution}
+    TCP
+    \end{solution}
+
+    \part{O número da porta usado pelo servidor Web (porta origem)}
+    \begin{solution}
+    80
+    \end{solution}
+
+    \part{O IP do servidor Web}
+    \begin{solution}
+    128.119.245.12
+    \end{solution}
+\end{parts}

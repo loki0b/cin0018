@@ -1,0 +1,67 @@
+\question{Verifique quais os registros DNS estão armazenados na cache local do seu host. Que informações tais registros apresentam?(Capture a tela obtida)}    
+
+\begin{solution}
+Estou utilizando o resolvectl pois na minha máquina eu configurei o systemd-resolved para ser meu resolver local.
+
+\begin{minted}{console}
+loki0b@4rch ~ $ sudo resolvectl show-cache
+Scope protocol=llmnr family=AF_INET6 ifindex=6 ifname=wlan1
+No entries.
+
+Scope protocol=llmnr family=AF_INET ifindex=6 ifname=wlan1
+No entries.
+
+Scope protocol=dns ifindex=6 ifname=wlan1 DNSSEC=no DNSOverTLS=yes
+ns1.google.com IN AAAA 2001:4860:4802:32::a
+mozilla.cloudflare-dns.com IN A 162.159.61.4
+mozilla.cloudflare-dns.com IN A 172.64.41.4
+raw.githubusercontent.com IN AAAA 2606:50c0:8000::154
+raw.githubusercontent.com IN AAAA 2606:50c0:8002::154
+raw.githubusercontent.com IN AAAA 2606:50c0:8003::154
+raw.githubusercontent.com IN AAAA 2606:50c0:8001::154
+sigaa.ufpe.com IN ANY NXDOMAIN
+www.google.br IN ANY NXDOMAIN
+mozilla.cloudflare-dns.com IN AAAA 2a06:98c1:52::4
+mozilla.cloudflare-dns.com IN AAAA 2803:f800:53::4
+raw.githubusercontent.com IN A 185.199.108.133
+raw.githubusercontent.com IN A 185.199.110.133
+raw.githubusercontent.com IN A 185.199.111.133
+raw.githubusercontent.com IN A 185.199.109.133
+yahoo.com IN MX 1 mta6.am0.yahoodns.net
+yahoo.com IN MX 1 mta5.am0.yahoodns.net
+yahoo.com IN MX 1 mta7.am0.yahoodns.net
+ipv4only.arpa IN A 192.0.0.170
+ipv4only.arpa IN A 192.0.0.171
+www.github.com IN CNAME github.com
+ns1.google.com IN A 216.239.32.10
+google.com IN NS ns1.google.com
+google.com IN NS ns4.google.com
+google.com IN NS ns2.google.com
+google.com IN NS ns3.google.com
+
+Scope protocol=dns DNSSEC=no DNSOverTLS=yes
+ipv4only.arpa IN A 192.0.0.170
+ipv4only.arpa IN A 192.0.0.171
+www.google.br IN ANY NXDOMAIN
+mozilla.cloudflare-dns.com IN AAAA 2a06:98c1:52::4
+mozilla.cloudflare-dns.com IN AAAA 2803:f800:53::4
+raw.githubusercontent.com IN A 185.199.110.133
+raw.githubusercontent.com IN A 185.199.108.133
+raw.githubusercontent.com IN A 185.199.111.133
+raw.githubusercontent.com IN A 185.199.109.133
+ns1.google.com IN A 216.239.32.10
+mozilla.cloudflare-dns.com IN A 172.64.41.4
+mozilla.cloudflare-dns.com IN A 162.159.61.4
+raw.githubusercontent.com IN AAAA 2606:50c0:8002::154
+raw.githubusercontent.com IN AAAA 2606:50c0:8000::154
+raw.githubusercontent.com IN AAAA 2606:50c0:8001::154
+raw.githubusercontent.com IN AAAA 2606:50c0:8003::154
+www.github.com IN CNAME github.com
+google.com IN NS ns3.google.com
+google.com IN NS ns4.google.com
+google.com IN NS ns2.google.com
+google.com IN NS ns1.google.com
+ns1.google.com IN AAAA 2001:4860:4802:32::a
+\end{minted}    
+
+\end{solution}
