@@ -1,0 +1,16 @@
+\question{No cabeçalho UDP, identifique qual a função de cada campo e seu respectivo valor.}
+
+\begin{solution}
+    \begin{minted}[linenos]{text}
+    User Datagram Protocol, Src Port: 443, Dst Port: 42085
+    Source Port: 443
+    Destination Port: 42085
+    Length: 788
+    Checksum: 0x67c1 [unverified]
+    \end{minted}
+
+    \textbf{Source Port:} Se refere a porta do host de origem. Nesse caso 443, pois, esse datagrama vem do server.\\
+    \textbf{Destination Port:} Se refere a porta do host de destino.\\
+    \textbf{Length:} Tamanho do datagrama, headers + data.\\
+    \textbf{Checksum:} Serve para detecção de erros, mas não corrige.\\
+\end{solution}
