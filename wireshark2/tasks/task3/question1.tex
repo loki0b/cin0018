@@ -1,5 +1,47 @@
 \question{Identifique (justificando a escolha) os segmentos TCP que demonstram o estabelecimento de conexão TCP (3-way hand shake) entre o seu browser e o servidor Web que hospeda o site da UFPE. Indique os números de sequência e de ACK de cada um dos segmentos. (Faça um print de cada um dos pacotes, destacando as informações da camada de transporte que suportam a sua escolha)}
 
 \begin{solution}
-    
+    O pacote $240$ é pedido de estabelecimento de conexão do client para o servidor.
+    Estarei utilizando os seq numbers relativos à conexão.
+    O segmento é enviado com um ISN 0 e com a flag SYN setada.\\
+    \begin{minted}[linenos, breaklines]{text}
+    Transmission Control Protocol, Src Port: 59002, Dst Port: 443, Seq: 0, Len: 0
+        Source Port: 59002
+        Destination Port: 443
+        Sequence Number (relative): 0
+        Acknowledgment number (relative): 0
+        1010 .... = Header Length: 40 bytes (10)
+        Flags: 0x002 (SYN)
+        Window: 64240
+        Checksum: 0x3a66
+        Urgent Pointer: 0
+    \end{minted}
+
+    No pacote $241$ o servidor responde com as flags SYN,ACK e ISN $0$ e ACK number $0 + 1 = 1$
+    \begin{minted}[linenos, breaklines]{text}
+    Transmission Control Protocol, Src Port: 443, Dst Port: 59002, Seq: 0, Ack: 1, Len: 0
+        Source Port: 443
+        Destination Port: 59002
+        Sequence Number (relative): 0
+        Acknowledgment Number (relative): 1
+        1000 .... = Header Length: 32 bytes (8)
+        Flags: 0x012 (SYN, ACK)
+        Window: 32120
+        Checksum: 0xee2a
+        Urgent Pointer: 0
+    \end{minted}
+
+    Finalizando no pacote $242$, o cliente envia um ACK para finalizar o handshake e começar a enviar dados.
+    \begin{minted}[linenos, breaklines]{text}
+    Transmission Control Protocol, Src Port: 59002, Dst Port: 443, Seq: 1, Ack: 1, Len: 0
+        Source Port: 59002
+        Destination Port: 443
+        Sequence Number (relative): 1 
+        Acknowledgment Number (relative): 1
+        0101 .... = Header Length: 20 bytes (5)
+        Flags: 0x010 (ACK)
+        Window: 63
+        Checksum: 0xac36
+        Urgent Pointer: 0
+    \end{minted}   
 \end{solution}

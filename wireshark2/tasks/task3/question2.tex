@@ -3,16 +3,47 @@
 \begin{parts}
     \part{Que informação no primeiro segmento que seu browser envia para o servidor Web faz com que ele seja identificado como sendo um segmento de SYN?}
     \begin{solution}
-        
+        Ele verifica a flag SYN no field de flags e verifica se o ACK está zerada. Isso para o caso de pedido de conexão.
     \end{solution}
 
     \part{Que informação o servidor envia para o seu host faz com que ele seja identificado como sendo um segmento de SYNACK?}
     \begin{solution}
-        
+        As flags SYN, ACK ativadas.
     \end{solution}
 
     \part{Identifique (justificando a escolha) os segmentos TCP que demonstrem a finalização da conexão TCP (Faça um print de cada um dos pacotes, destacando as informações da camada de transporte). É fundamental você justificar o motivo da escolha de tais pacotes, citando informações contidas neles para subsidiar a sua resposta).}
     \begin{solution}
-        
+        No pacote $299$ o client ativa a flag FIN para sinalizar ao servidor que não mais enviará dados e está encerrando a  conexão.
+        \begin{minted}[linenos, breaklines]{text}
+        Transmission Control Protocol, Src Port: 59002, Dst Port: 443, Seq: 1774, Ack: 5811, Len: 0
+            Source Port: 59002
+            Destination Port: 443
+            Sequence Number: 1774    (relative sequence number)
+            Sequence Number (raw): 2417578070
+            Acknowledgment Number: 5811    (relative ack number)
+            Acknowledgment number (raw): 2048018664
+            0101 .... = Header Length: 20 bytes (5)
+            Flags: 0x011 (FIN, ACK)
+            Window: 60
+            Checksum: 0x8e99 [unverified]
+            Urgent Pointer: 0
+        \end{minted}    
+
+        No pacote $301$, o servidor responde também com a flag FIN, sinalizando o encerramento de da conexão.
+        \begin{minted}[linenos, breaklines]{text}
+        Transmission Control Protocol, Src Port: 443, Dst Port: 59002, Seq: 5811, Ack: 1775, Len: 0
+            Source Port: 443
+            Destination Port: 59002
+            Sequence Number: 5811    (relative sequence number)
+            Sequence Number (raw): 2048018664
+            [Next Sequence Number: 5812    (relative sequence number)]
+            Acknowledgment Number: 1775    (relative ack number)
+            Acknowledgment number (raw): 2417578071
+            0101 .... = Header Length: 20 bytes (5)
+            Flags: 0x011 (FIN, ACK)
+            Window: 249
+            Checksum: 0x8ddb [unverified]
+            Urgent Pointer: 0
+        \end{minted}
     \end{solution}
 \end{parts}

@@ -1,5 +1,27 @@
 \question{No cabeçalho TCP do pacote escolhido, identifique qual a função de cada campo com seu respectivo valor.}
     
 \begin{solution}
+    \textbf{Source Port: 59002} - 16 bits que indica o número da porta do transmissor.
     
+    \textbf{Destination Port: 443} - 16 bits que indica o número da porta do receptor.
+
+    \textbf{Sequence Number: 2417576296} - 32 bits que serve para três principais coisas: Three-Way-Hadshake, envio de dados, confirmação de recebimento dos dados
+    . No Three-Way-Hadshake o client envia um segmento SYN com um ISN, o server responde com um segmento SYN,ACK com seu ISN e o ACK (client\_ISN + 1)
+    , por fim o client responde com um segmento ACK (server\_ISN + 1).
+    No envio de dados  e confirmação, o sequence number enviado para confirmação dos dados recebidos é dado por SEQNum + total\_bytes\_enviados
+    . O receptor envia um segmento ACK adicionando mais 1 no seqnumber do transmissor para dizer que recebeu os dados e que espera os proximos dados.
+
+    \textbf{Ack Number: 0} - 2 bits que o receptor utiliza para fazer request do próximo segmento.
+
+    \textbf{Header Length: 0b1010 = 10} - 4 bits que indica o tamanho do header do segmento. O valor informado é em tamanho de double word (32 bits). Então o tamanho do header é $10 \cdot 4 = 40$ Bytes.
+
+    \textbf{Flags: 0x002 (SYN)} - 9 bits para flags de controle.
+
+    \textbf{Window Size: 64240} - 16 bits para o receptor indicar quantos bytes ele esta disposto areceber.
+
+    \textbf{Checksum: 0x3a66} - 16 bits para verificar se o header está correto.
+
+    \textbf{Urgent Pointer: 0} - 16 bits que são usados quando a flag URG é acionada e indica o final do "dado urgent"
+
+    \textbf{Options} - Mais opções que podem ser usadas.
 \end{solution}
