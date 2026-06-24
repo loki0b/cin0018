@@ -1,0 +1,15 @@
+\question{Inicie o Wireshark e abra um browser e digite o endereço www.ufpe.br e em seguida aperte a tecla enter. Assim que aparecer a tela inicial da UFPE, pare a captura e salve o trace em um arquivo.}
+\begin{solution}
+    \begin{minted}[linenos, breaklines]{bash}
+        loki0b@4rch ~ $ arp
+        Address                  HWtype  HWaddress           Flags Mask            Iface
+        192.168.1.2              ether   92:13:0a:94:4e:72   C                     wlan1
+        _gateway                 ether   c0:91:20:f9:17:f8   C                     wlan1
+    \end{minted}
+
+    Address: Endereço IP do dispositivo.\\
+    HWType: Tipo de hardware de rede.\\
+    HWAddres: Endereço MAC.\\
+    Flag Mask: Indica o estado da entrada na tabela ARP. A letra C significa Completed.\\
+    Iface: Mostra o nome da interface de rede local que está sendo usada para alcançar aquele dispositivo.\\
+\end{solution}
